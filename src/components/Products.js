@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Product from "./Product";
 import "./Products.css";
 
@@ -13,7 +12,7 @@ const Products = () => {
           image="https://m.media-amazon.com/images/I/71M9yUXjxjL._AC_SX679_.jpg"
           rating={5}
           price={49.38}
-        />{" "}
+        />
         <Product
           id="1112"
           title="McFarlane Toys - DC Gaming 7 Figures Wave 9 - Earth-2 Batman (Arkham Knight)"

@@ -1,19 +1,20 @@
-import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-// import ShoppingContext from "../../context/shopping/shoppingContext";
+import ShoppingContext from "../../context/shopping/shoppingContext";
 import "./Header.css";
+import { auth } from "../../Firebase";
 
 const Header = () => {
-  // const shoppingContext = useContext(ShoppingContext);
-  // const { basket, user } = shoppingContext;
+  const shoppingContext = useContext(ShoppingContext);
+  const { basket, user } = shoppingContext;
 
-  // const handleAuthentication = () => {
-  //   if (user) {
-  //     auth.signOut();
-  //   }
-  // };
+  const handleAuthentication = () => {
+    if (user) {
+      auth.signOut();
+    }
+  };
 
   return (
     <header className="header">
@@ -29,13 +30,13 @@ const Header = () => {
         <SearchIcon className="search_icon" />
       </div>
       <div className="header_nav">
-        <Link to={"/login"}>
-          <div className="header_option">
+        <Link to={!user && "/login"}>
+          <div className="header_option" onClick={handleAuthentication}>
             <span className="header_optionOne">
-              Hello 
+              Hello {!user ? "Guest" : user.email}
             </span>
             <span className="header_optionTwo">
-              {/* {user ? "Sign Out" : "Sign In"} */}
+              {user ? "Sign Out" : "Sign In"}
             </span>
           </div>
         </Link>
@@ -52,7 +53,7 @@ const Header = () => {
           <div className="header_optionBasket">
             <ShoppingBasketIcon />
             <span className="header_optionTwo header_basketCount">
-              0
+              {basket?.length}
             </span>
           </div>
         </Link>
@@ -63,9 +64,3 @@ const Header = () => {
 
 export default Header;
 
-
-
-// {!user ? "Guest" : user.email}
-
-// !user && 
-// onClick={handleAuthentication}
